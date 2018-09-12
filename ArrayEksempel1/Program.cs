@@ -10,25 +10,26 @@ namespace ArrayEksempel1
     {
         static void Main(string[] args)
         {
-            Search2(args);
+            //args = new[] {"10", "11", "12"};
+            FindMax(args);
+            //Search(args);
         }
 
-        static void Search2(string[] args)
+        static void FindMax(string[] args)
         {
-            int[] intArray = { 10, 20, 30 };
-            int targetValue = Convert.ToInt32(args[0]);
-            int targetPos = 0;
-            while (targetPos < intArray.Length
-                && intArray[targetPos] != targetValue)
+            int[] intArray = args.Select(s => Convert.ToInt32(s)).ToArray();
+            var maxSoFar = intArray[0];
+            var maxSoFarIndex = 0;
+            for (int i = 1; i < intArray.Length; i++)
             {
-                targetPos++;
+                if (intArray[i] > maxSoFar)
+                {
+                    maxSoFar = intArray[i];
+                    maxSoFarIndex = i;
+                }
             }
 
-            var isFound = targetPos < intArray.Length;
-            var text = isFound
-                ? $"Fant verdien {targetValue} i indeks {targetPos}."
-                : $"Fant ikke verdien {targetValue}.";
-            Console.WriteLine(text);
+            Console.WriteLine($"Det høyeste tallet er {maxSoFar} og ligger i indeks {maxSoFarIndex}.");
         }
 
         static void Search(string[] args)
